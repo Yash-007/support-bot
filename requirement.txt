@@ -1,0 +1,5 @@
+chromadb
+google-genai
+google-generativeai
+sentence-transformers
+flask

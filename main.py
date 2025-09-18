@@ -7,6 +7,7 @@ import argparse
 import shutil
 from datetime import datetime
 from sentence_transformers import SentenceTransformer
+from flask import Flask, request, jsonify
 
 from helper import BotFacade
 from raw_data.docs import (
@@ -19,8 +20,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description='Vector Database FAQ System')
     parser.add_argument('--reinit-db', action='store_true', 
                       help='Reinitialize the database (warning: deletes existing data)')
-    parser.add_argument('--auth-token', type=str, required=True,
-                      help='Authentication token for CoinSwitch API')
+    # parser.add_argument('--auth-token', type=str, required=True,
+    #                   help='Authentication token for CoinSwitch API')
     parser.add_argument('--test-type', type=str, choices=['wallet', 'trading', 'fees', 'all'],
                       default='all', help='Type of tests to run (wallet/trading/fees/all)')
     parser.add_argument('--delay', type=int, default=3,
@@ -499,3 +500,31 @@ except Exception as e:
 finally:
     print("\nTesting completed")
     time.sleep(2)  # Small delay between queries
+
+if __name__ == "__main__":
+    app = Flask(__name__)
+    
+    @app.route("/health", methods=["GET"])
+    def health_check():
+        return jsonify({"status": "ok"}), 200
+
+    @app.route("/chat", methods=["POST"])
+    def query():
+        
+        # Get 'st' cookie from request and use as auth token
+        auth_token = request.cookies.get("st")
+        if not auth_token:
+            return jsonify({"error": "Missing authentication token (cookie 'st' not found)"}), 401
+        bot = BotFacade(auth_token=auth_token)
+
+        data = request.get_json()
+        user_query = data.get("query", "")
+        if not user_query:
+            return jsonify({"error": "No query provided"}), 400
+        try:
+            answer = bot.get_data_from_llm(model, collection, user_query)
+            return jsonify({"answer": answer, "status": "success"}), 200
+        except Exception as e:
+            return jsonify({"error": str(e), "status": "error"}), 500
+
+    app.run(host="0.0.0.0", port=5000)

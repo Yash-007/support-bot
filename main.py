@@ -16,6 +16,8 @@ from raw_data.docs import (
     FAQ_DOCS
 )
 
+from portfolio import PortfolioAnalyzer
+
 def parse_args():
     parser = argparse.ArgumentParser(description='Vector Database FAQ System')
     parser.add_argument('--reinit-db', action='store_true', 
@@ -503,6 +505,31 @@ finally:
 
 if __name__ == "__main__":
     app = Flask(__name__)
+    
+    @app.route("/portfolio-chart", methods=["GET"])
+    def portfolio_chart():
+        auth_token = request.cookies.get("st")
+        if not auth_token:
+            return jsonify({"error": "Missing authentication token (cookie 'st' not found)"}), 401
+
+        try:
+            symbol = request.args["symbol"]
+            from_time = int(request.args["from_time"])
+            to_time = int(request.args["to_time"])
+            c_duration = int(request.args["c_duration"])
+            exchange = request.args["exchange"]
+
+            analyzer = PortfolioAnalyzer(auth_token=auth_token, verify_ssl=False)
+            chart_data = analyzer.generate_portfolio_series(
+                symbol=symbol,
+                from_time=from_time,
+                to_time=to_time,
+                c_duration=c_duration,
+                exchange=exchange
+            )
+            return jsonify({"data": chart_data, "status": "success"}), 200
+        except Exception as e:
+            return jsonify({"error": str(e), "status": "error"}), 500
     
     @app.route("/health", methods=["GET"])
     def health_check():

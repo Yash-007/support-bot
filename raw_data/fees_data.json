@@ -1,0 +1,49 @@
+{
+  "spot": {
+    "fees": [
+      { "volume": "0 - 5 L", "maker": "0.40%", "taker": "0.40%" },
+      { "volume": "5 L - 20 L", "maker": "0.26%", "taker": "0.26%" },
+      { "volume": "20 L - 50 L", "maker": "0.24%", "taker": "0.24%" },
+      { "volume": "50 L - 5 Cr", "maker": "0.20%", "taker": "0.20%" },
+      { "volume": "5 Cr - 20 Cr", "maker": "0.14%", "taker": "0.14%" },
+      { "volume": "20 Cr - 50 Cr", "maker": "0.12%", "taker": "0.12%" },
+      { "volume": "50 Cr - 100 Cr", "maker": "0.08%", "taker": "0.08%" },
+      { "volume": "100 Cr - 300 Cr", "maker": "0.06%", "taker": "0.06%" },
+      { "volume": "300 Cr - 5000 Cr", "maker": "0.04%", "taker": "0.04%" }
+    ]
+  },
+  "futures": {
+    "inr": {
+      "fees": [
+        { "level": "VIP 1", "volume": "0 - 10 Lac", "maker": "0.000%", "taker": "0.000%" },
+        { "level": "VIP 2", "volume": "10 Lac - 10 Cr", "maker": "0.030%", "taker": "0.065%" },
+        { "level": "VIP 3", "volume": "10 Cr - 50 Cr", "maker": "0.027%", "taker": "0.055%" },
+        { "level": "VIP 4", "volume": "50 Cr - 150 Cr", "maker": "0.020%", "taker": "0.050%" },
+        { "level": "VIP 5", "volume": "150 Cr - 500 Cr", "maker": "0.018%", "taker": "0.045%" },
+        { "level": "VIP 6", "volume": "500 Cr+", "maker": "0.012%", "taker": "0.020%" }
+      ]
+    },
+    "usdt": {
+      "fees": [
+        { "level": "VIP 1", "volume": "0 - 10K", "maker": "0.000%", "taker": "0.000%" },
+        { "level": "VIP 2", "volume": "10K - 1M", "maker": "0.030%", "taker": "0.065%" },
+        { "level": "VIP 3", "volume": "1M - 5M", "maker": "0.027%", "taker": "0.055%" },
+        { "level": "VIP 4", "volume": "5M - 15M", "maker": "0.020%", "taker": "0.050%" },
+        { "level": "VIP 5", "volume": "15M - 50M", "maker": "0.018%", "taker": "0.045%" },
+        { "level": "VIP 6", "volume": "50M+", "maker": "0.012%", "taker": "0.020%" }
+      ]
+    }
+  },
+  "options": {
+    "inr": {
+      "note": "Options Fee is capped at 5.9% of Options Premium",
+      "maker": "0.0127%",
+      "taker": "0.0170%"
+    },
+    "usdt": {
+      "note": "Options Fee is capped at 5.9% of Options Premium",
+      "maker": "0.0127%",
+      "taker": "0.0170%"
+    }
+  }
+}

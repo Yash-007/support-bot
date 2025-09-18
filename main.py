@@ -2,8 +2,10 @@ import chromadb
 import os
 import ssl
 import time
+import json
 import argparse
 import shutil
+from datetime import datetime
 from sentence_transformers import SentenceTransformer
 
 from helper import BotFacade
@@ -19,8 +21,8 @@ def parse_args():
                       help='Reinitialize the database (warning: deletes existing data)')
     parser.add_argument('--auth-token', type=str, required=True,
                       help='Authentication token for CoinSwitch API')
-    parser.add_argument('--test-type', type=str, choices=['wallet', 'trading', 'all'],
-                      default='all', help='Type of tests to run (wallet/trading/all)')
+    parser.add_argument('--test-type', type=str, choices=['wallet', 'trading', 'fees', 'all'],
+                      default='all', help='Type of tests to run (wallet/trading/fees/all)')
     parser.add_argument('--delay', type=int, default=3,
                       help='Delay between queries in seconds (default: 3)')
     return parser.parse_args()
@@ -209,15 +211,15 @@ bot = BotFacade(auth_token=args.auth_token)
 # Wallet API specific test queries
 wallet_test_queries = [
     "What's my total deposit amount in my wallet?",
-    # "Show me my last 5 deposits",
-    # "How much money have I withdrawn in total?",
-    # "What's my current wallet balance?",
-    # "Show me my transaction history",
-    # "What's my largest deposit amount?",
-    # "Show me withdrawals from last month",
-    # "What's my average deposit size?",
-    # "How many successful deposits have I made?",
-    # "Show me my pending transactions"
+    "Show me my last 5 deposits",
+    "How much money have I withdrawn in total?",
+    "What's my current wallet balance?",
+    "Show me my transaction history",
+    "What's my largest deposit amount?",
+    "Show me withdrawals from last month",
+    "What's my average deposit size?",
+    "How many successful deposits have I made?",
+    "Show me my pending transactions"
 ]
 
 # Trading API specific test queries
@@ -232,6 +234,20 @@ trading_test_queries = [
     "What's my average selling price for ETH?",
     "How many trades did I make last month?",
     "Show me my open orders"
+]
+
+# Fees specific test queries
+fees_test_queries = [
+    "What are the spot trading fees?",
+    "Show me futures trading fees for INR pairs",
+    "What are the maker fees for USDT futures?",
+    "Tell me about options trading fees",
+    "What are the taker fees for spot trading?",
+    "Show me all trading fees",
+    "What's the fee structure for high volume traders?",
+    "Tell me about VIP level fees in futures",
+    "What are the fees for options trading in USDT?",
+    "How do maker and taker fees work?"
 ]
 
 # Combined test queries for general testing
@@ -251,12 +267,45 @@ test_queries = [
     "How do I change my bank details?"
 ]
 
+def save_trading_results(test_results: dict):
+    """Save trading results to a separate file, overwriting previous results."""
+    try:
+        results_file = "trading_results.json"
+        trading_results = {
+            "last_run": datetime.now().isoformat(),
+            "queries": []
+        }
+        
+        # Extract trading-specific results from test_results
+        for query in test_results.get("queries", []):
+            trading_results["queries"].append({
+                "query": query.get("query", ""),
+                "timestamp": query.get("timestamp", ""),
+                "processing_time": query.get("processing_time", 0),
+                "answer": query.get("answer", ""),
+                "status": query.get("status", "unknown")
+            })
+        
+        with open(results_file, 'w') as f:
+            json.dump(trading_results, f, indent=2)
+        print(f"\nTrading results saved to {results_file}")
+    except Exception as e:
+        print(f"\nWarning: Could not save trading results to file: {str(e)}")
+
 def run_test_queries(queries, test_name, delay=3):
     """Run a set of test queries with proper formatting and delays."""
     success_count = 0
     error_count = 0
     api_errors = 0
     db_errors = 0
+    
+    # Initialize test results
+    test_results = {
+        "test_name": test_name,
+        "timestamp": datetime.now().isoformat(),
+        "total_queries": len(queries),
+        "queries": []
+    }
     
     print(f"\n{test_name}")
     print("=" * len(test_name))
@@ -265,6 +314,12 @@ def run_test_queries(queries, test_name, delay=3):
         print(f"\nTest {i}/{len(queries)}")
         print(f"Query: {query}")
         print("-" * 50)
+        
+        query_result = {
+            "query": query,
+            "query_number": i,
+            "timestamp": datetime.now().isoformat()
+        }
         
         try:
             # Validate query
@@ -281,21 +336,45 @@ def run_test_queries(queries, test_name, delay=3):
                 success_count += 1
                 print(f"\nAnswer: {answer}")
                 print(f"Processing time: {processing_time:.2f} seconds")
+                query_result.update({
+                    "status": "success",
+                    "answer": answer,
+                    "processing_time": round(processing_time, 2)
+                })
             else:
                 error_count += 1
                 if "API" in answer:
                     api_errors += 1
+                    error_type = "api_error"
                 else:
                     db_errors += 1
+                    error_type = "db_error"
                 print(f"\nError in response: {answer}")
+                query_result.update({
+                    "status": "error",
+                    "error_type": error_type,
+                    "error_message": answer,
+                    "processing_time": round(processing_time, 2)
+                })
                 
         except Exception as e:
             error_count += 1
-            print(f"\nError processing query: {str(e)}")
-            if "API" in str(e):
+            error_msg = str(e)
+            print(f"\nError processing query: {error_msg}")
+            if "API" in error_msg:
                 api_errors += 1
+                error_type = "api_error"
             else:
                 db_errors += 1
+                error_type = "db_error"
+            query_result.update({
+                "status": "error",
+                "error_type": error_type,
+                "error_message": error_msg
+            })
+        
+        # Add query result to test results
+        test_results["queries"].append(query_result)
         
         print("\n" + "=" * 80)
         
@@ -306,7 +385,20 @@ def run_test_queries(queries, test_name, delay=3):
                 time.sleep(delay)
             except KeyboardInterrupt:
                 print("\nTesting interrupted by user")
+                test_results["status"] = "interrupted"
                 break
+    
+    # Add summary to test results
+    test_results.update({
+        "summary": {
+            "success_count": success_count,
+            "error_count": error_count,
+            "api_errors": api_errors,
+            "db_errors": db_errors,
+            "success_rate": round((success_count/len(queries))*100, 1)
+        },
+        "status": test_results.get("status", "completed")
+    })
     
     # Print summary
     print(f"\nTest Summary for {test_name}")
@@ -317,9 +409,27 @@ def run_test_queries(queries, test_name, delay=3):
     if error_count > 0:
         print(f"  API Errors: {api_errors}")
         print(f"  DB Errors: {db_errors}")
-    print(f"Success Rate: {(success_count/len(queries))*100:.1f}%")
+    print(f"Success Rate: {test_results['summary']['success_rate']}%")
     
-    return success_count, error_count
+    # Save results to file
+    try:
+        results_file = "test_results.json"
+        if os.path.exists(results_file):
+            with open(results_file, 'r') as f:
+                all_results = json.load(f)
+        else:
+            all_results = {"test_runs": []}
+            
+        all_results["test_runs"].append(test_results)
+        
+        with open(results_file, 'w') as f:
+            json.dump(all_results, f, indent=2)
+        print(f"\nTest results saved to {results_file}")
+        
+    except Exception as e:
+        print(f"\nWarning: Could not save test results to file: {str(e)}")
+    
+    return success_count, error_count, test_results
 
 # Validate environment before starting tests
 if not validate_environment():
@@ -332,7 +442,7 @@ total_errors = 0
 try:
     # Run tests based on selected type
     if args.test_type in ['wallet', 'all']:
-        success, errors = run_test_queries(
+        success, errors, _ = run_test_queries(
             wallet_test_queries,
             "Testing Wallet API Queries",
             delay=args.delay
@@ -341,9 +451,22 @@ try:
         total_errors += errors
 
     if args.test_type in ['trading', 'all']:
-        success, errors = run_test_queries(
+        success, errors, test_results = run_test_queries(
             trading_test_queries,
             "Testing Trading API Queries",
+            delay=args.delay
+        )
+        
+        # Save trading specific results
+        save_trading_results(test_results)
+        
+        total_success += success
+        total_errors += errors
+
+    if args.test_type in ['fees', 'all']:
+        success, errors, _ = run_test_queries(
+            fees_test_queries,
+            "Testing Fees Queries",
             delay=args.delay
         )
         total_success += success
@@ -351,7 +474,7 @@ try:
 
     if args.test_type == 'all':
         print("\nStarting combined API and FAQ tests...")
-        success, errors = run_test_queries(
+        success, errors, _ = run_test_queries(
             test_queries,
             "Testing Combined Queries",
             delay=args.delay
@@ -360,7 +483,7 @@ try:
         total_errors += errors
 
     # Print overall summary
-    total_queries = len(wallet_test_queries) + len(trading_test_queries) + len(test_queries)
+    total_queries = len(wallet_test_queries) + len(trading_test_queries) + len(fees_test_queries) + len(test_queries)
     print("\nOverall Test Summary")
     print("===================")
     print(f"Total Queries Run: {total_success + total_errors}")
@@ -376,4 +499,3 @@ except Exception as e:
 finally:
     print("\nTesting completed")
     time.sleep(2)  # Small delay between queries
-

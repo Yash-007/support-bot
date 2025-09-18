@@ -1,0 +1,11 @@
+REQ:
+    - able to serve support questions based on static docs (faq).
+    - Trading Options.
+        - historical smart Investment Profit.
+        - Future Trading. -> top contracts to trade on.
+        - API TRADING -> user gaining profit 20% with proper algo, doc link.
+        - Options trading -> doc link.
+        - SPOT Trading.
+
+    - transaction history based Q&A.
+    -

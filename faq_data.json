@@ -1,0 +1,416 @@
+[
+  {
+    "id": "fund_transfer_bank_supported",
+    "title": "What are the supported banks?",
+    "content": "You can link any of your bank accounts that support net banking or mobile banking to your CoinSwitch PRO account. However, please note that we do not accept deposits made through NRE/NRO accounts.",
+    "category": "fund_transfer",
+    "subcategory": "bank_account",
+    "keywords": ["banks", "supported", "net banking", "mobile banking", "NRE", "NRO"],
+    "type": "faq"
+  },
+  {
+    "id": "fund_transfer_bank_change",
+    "title": "How can I change my bank details?",
+    "content": "You can change your bank details for CoinSwitch PRO on the mobile app. To do so, please log into your CoinSwitch mobile app and follow the simple steps below. 1. Navigate to the 'Profile' page on your mobile app. 2. Select 'Bank Details'. 3. Click on 'Edit'. 4. Clear the previous bank account details and add the new bank details. 5. Double-check the details. Once done, click on 'SUBMIT'.",
+    "category": "fund_transfer",
+    "subcategory": "bank_account",
+    "keywords": ["change bank details", "mobile app", "profile", "edit"],
+    "type": "procedure"
+  },
+  {
+    "id": "fund_transfer_bank_unable_add",
+    "title": "I am unable to add my bank details. What should I do?",
+    "content": "In case you are unable to add your bank details for CoinSwitch PRO, please double-check: You have entered the correct IFSC code, You have entered the correct account number, The name on your bank account should exactly match the name on your PAN card. If you have correctly followed all the steps and are still unable to add/update the bank account, please contact us with screenshots or screen recordings of any error message on the 'Bank Details' page. Note: 1. If you have logged in from a new device, you cannot add/modify your bank details for 48 hours from the time of logging in from a new device. This is done for security reasons to ensure that it is indeed you who logged in to your account. 2. If you have logged in from a new device, in addition to the bank details modification being disabled, withdrawals, gift card creation, and forgot PIN options will also be disabled for 48 hours.",
+    "category": "fund_transfer",
+    "subcategory": "bank_account",
+    "keywords": ["unable to add", "bank details", "IFSC", "account number", "PAN card", "new device", "48 hours"],
+    "type": "troubleshooting"
+  },
+  {
+    "id": "fund_transfer_deposit_failed",
+    "title": "My deposit has failed. What should I do?",
+    "content": "In case your deposit has failed or was rejected, the amount will automatically be refunded to your bank account within 3 to 5 working days. If you have not received the amount within 3 to 5 days, please create a ticket with your deposit transaction details as an attachment.",
+    "category": "fund_transfer",
+    "subcategory": "inr_deposit",
+    "keywords": ["deposit failed", "refund", "3 to 5 working days", "ticket"],
+    "type": "troubleshooting"
+  },
+  {
+    "id": "fund_transfer_deposit_pending",
+    "title": "My deposit is pending. What should I do?",
+    "content": "If your deposit is pending and has not been credited to your INR Wallet on CoinSwitch PRO, please wait for 48 hours. The amount will be credited to your wallet. In case the amount has not been deposited in your INR Wallet even after the 48 hours window, it might be due to a delay from the bank. Any INR deposits which do not reflect in your INR Wallet will automatically be refunded to your bank account within 3 to 5 working days. If the amount has not been refunded after 3 to 5 working days, please create a ticket with our support team.",
+    "category": "fund_transfer",
+    "subcategory": "inr_deposit",
+    "keywords": ["deposit pending", "48 hours", "INR wallet", "bank delay", "refund"],
+    "type": "troubleshooting"
+  },
+  {
+    "id": "fund_transfer_withdrawal_pending",
+    "title": "My withdrawal is pending. What should I do?",
+    "content": "If your withdrawal is pending and the amount has not been credited to your bank account, please wait for 24-48 hours. The amount will be credited to your bank account. In case the amount has not been credited even after the 48 hours window, please create a ticket with our support team.",
+    "category": "fund_transfer",
+    "subcategory": "inr_withdrawal",
+    "keywords": ["withdrawal pending", "24-48 hours", "bank account", "ticket"],
+    "type": "troubleshooting"
+  },
+  {
+    "id": "fund_transfer_withdrawal_failed",
+    "title": "My withdrawal has failed. What should I do?",
+    "content": "In case your withdrawal has failed or was rejected, the amount will automatically be refunded to your INR Wallet on CoinSwitch PRO. Please note that sometimes a withdrawal can take up to 24-48 hours to get processed. If your withdrawal has been rejected, but the amount has been debited from your wallet, please create a ticket with your deposit transaction details as an attachment.",
+    "category": "fund_transfer",
+    "subcategory": "inr_withdrawal",
+    "keywords": ["withdrawal failed", "refunded", "INR wallet", "24-48 hours", "ticket"],
+    "type": "troubleshooting"
+  },
+  {
+    "id": "account_login_existing",
+    "title": "How to login to CoinSwitch PRO (Existing User)",
+    "content": "To login to CoinSwitch PRO, please follow the simple steps below. 1. Go to the CoinSwitch PRO website: https://coinswitch.co/pro/trade 2. Click on 'Login' in the top right corner of the screen. 3. Enter your registered CoinSwitch mobile number and click on 'GET OTP'. 4. Enter the OTP sent to your registered mobile number and click on 'SUBMIT'. 5. Enter the login PIN that you use to access your CoinSwitch mobile app. You will be logged into your account successfully! In case you are not able to login even after following all the steps above, please contact our support team.",
+    "category": "account_related",
+    "subcategory": "signing_up_logging_in",
+    "keywords": ["login", "existing user", "OTP", "PIN", "mobile number"],
+    "type": "procedure"
+  },
+  {
+    "id": "account_login_new",
+    "title": "How can I log in to CoinSwitch PRO as a new user?",
+    "content": "If you are a new user on the CoinSwitch platform, to login to CoinSwitch PRO, please follow the simple steps below. Go to the CoinSwitch PRO website and click on 'Login'. Click on 'Signup'. Enter your mobile number and click on 'GET OTP'. Enter the OTP and click on 'SUBMIT OTP'. Create a 4-digit Login PIN and confirm your PIN by entering it again. You will be logged into CoinSwitch PRO successfully! In case you are not able to login even after following all the steps above, please contact our support team.",
+    "category": "account_related",
+    "subcategory": "signing_up_logging_in",
+    "keywords": ["new user", "signup", "4-digit PIN", "mobile number", "OTP"],
+    "type": "procedure"
+  },
+  {
+    "id": "account_signup_documents",
+    "title": "What details or documents do I need to sign up?",
+    "content": "As a new user, to sign up on CoinSwitch PRO via DigiLocker/Express KYC, you will need: Aadhaar number, OTP that will be sent to your Aadhaar-linked mobile number. To sign up on CoinSwitch PRO via Manual KYC, you will need: PAN card as ID proof, Any one of the documents below as your address proof: Aadhaar, Voter ID, Passport, Active mobile number, Active email ID. Note: You have to upload both front and backside photos of the documents. Both PAN and Aadhaar/Voter ID/passport should belong to you. Driving license will not be accepted. e-Aadhaar and e-PAN are accepted.",
+    "category": "account_related",
+    "subcategory": "signing_up_logging_in",
+    "keywords": ["signup documents", "DigiLocker", "Express KYC", "Manual KYC", "PAN card", "Aadhaar", "Voter ID", "Passport"],
+    "type": "requirements"
+  },
+  {
+    "id": "account_mobile_access",
+    "title": "Can I sign up or log in to CoinSwitch PRO via my phone?",
+    "content": "Absolutely! To access the mobile version of CoinSwitch PRO, follow the simple steps below. Open the browser on your mobile phone. Type in the website address: www.coinswitch.co/pro/trade. You can access your CoinSwitch PRO account on your mobile phone.",
+    "category": "account_related",
+    "subcategory": "signing_up_logging_in",
+    "keywords": ["mobile access", "phone", "browser", "mobile version"],
+    "type": "procedure"
+  },
+  {
+    "id": "account_sms_otp_issue",
+    "title": "I am unable to receive SMS OTP on my phone. What should I do?",
+    "content": "If you are unable to receive SMS OTP on your registered mobile phone, then maybe your mobile network is unstable or weak. Please check whether you are receiving SMSes from other service providers. Please follow these simple steps to sort the issue. 1. In case you are using mobile data, turn ON and OFF the airplane mode on your phone. 2. Update your CoinSwitch mobile app to its latest version on Play Store/App Store. 3. Uninstall and reinstall your CoinSwitch mobile app. Note: For security reasons, in a span of 12 hours, you can generate a maximum of 6 OTPs. If you've exceeded this limit, you will be unable to generate a new OTP for 12 hours.",
+    "category": "account_related",
+    "subcategory": "signing_up_logging_in",
+    "keywords": ["SMS OTP", "unable to receive", "network issue", "airplane mode", "app update", "6 OTP limit"],
+    "type": "troubleshooting"
+  },
+  {
+    "id": "account_change_email",
+    "title": "How to change my registered email ID?",
+    "content": "In order to change your registered email ID, please create a support ticket with the details below: 1. Specify your registered CoinSwitch mobile number 2. Specify the reason for changing your email ID 3. Attach your Video KYC. We will inform you about your email ID change status via SMS/email after validating the details from our end. Note: Once the change is approved and done, your withdrawals will be disabled for 24 hours for security reasons.",
+    "category": "account_related",
+    "subcategory": "contact_details",
+    "keywords": ["change email", "support ticket", "Video KYC", "withdrawals disabled", "24 hours"],
+    "type": "procedure"
+  },
+  {
+    "id": "account_change_mobile",
+    "title": "How to change my registered mobile number?",
+    "content": "In order to change your registered mobile number, please create a support ticket with the details below: 1. Specify the new mobile number you want to use 2. Specify the reason for the mobile number change 3. Attach your Video KYC. Note: 1. No existing CoinSwitch account should have been priorly linked to your new mobile number. 2. In case you've got a new mobile number, please do not attempt to create a new account or begin the KYC process with the new number. This is to avoid the creation of duplicate accounts with the same KYC documents. Instead, please reach our Support requesting a mobile number change. We will do the needful. 3. We will inform you about your mobile number change status via SMS/email after validating the details from our end. 4. Once the change is approved and done, your withdrawals will be disabled for 24 hours for security reasons.",
+    "category": "account_related",
+    "subcategory": "contact_details",
+    "keywords": ["change mobile number", "support ticket", "Video KYC", "duplicate accounts", "withdrawals disabled"],
+    "type": "procedure"
+  },
+  {
+    "id": "account_closure_procedure",
+    "title": "What is the account closure procedure?",
+    "content": "If you wish to close your CoinSwitch PRO account, please send us an email at help@coinswitch.co from your CoinSwitch registered email ID. Ensure that you specify the below details in the body of the email: 1. Your registered CoinSwitch mobile number. 2. The reason for account closure. Alternatively, you can temporarily uninstall the CoinSwitch mobile app and reinstall it, if you would like to use our services again.",
+    "category": "account_related",
+    "subcategory": "account_closure",
+    "keywords": ["account closure", "help@coinswitch.co", "registered email", "mobile number", "uninstall app"],
+    "type": "procedure"
+  },
+  {
+    "id": "account_nominee_add",
+    "title": "How to add nominee to my CoinSwitch PRO account?",
+    "content": "If you are an existing user of the CoinSwitch mobile app and have already added a nominee for the account, the same details will be linked to your CoinSwitch PRO account. However, if you are a new user or have not added a nominee to your mobile app, then to add a nominee for your CoinSwitch PRO account, please create a ticket or send us an email at help@coinswitch.co from your registered CoinSwitch email ID. Ensure to provide the below details of your nominee. 1. Full Name (should match with address and ID proofs shared) 2. Age and date of birth 3. Address 4. Phone number 5. Email ID 6. PAN details 7. Relationship (what is your relationship with the nominee?) 8. Recent photo 9. Address and ID proof (both front and back of the documents). Note: 1. The nominee must be of 18 years of age or above, of sound mind, and must be competent to contract in India. We suggest nominating a person you trust completely since they will be dealing with your assets while holding them in trust on your behalf. 2. We may reach out for additional documents and data concerning your nominee on a case-to-case basis. The usage, retention, and sharing of the nominee data by us shall be as per our AML Policy and Privacy Policy. 3. You must ensure that your nominee is aware of the assets held in your CoinSwitch wallet and understands that they need to reach out to us in case of an unfortunate event like your death or incapacity. Your nominee should contact us within a period of six (6) months from the date of your death or incapacitation with the requisite documents to take custody of your assets. In the event the nominee fails to contact us within six (6) months, we shall have the right to dispose of/liquidate your assets without any further liability or obligation to you/your nominee or your legal representatives. 4. CoinSwitch has no obligation to notify or email or contact your nominee for any reason whatsoever, including concerning intimation about the fact that you have appointed him/her as your nominee.",
+    "category": "account_related",
+    "subcategory": "nominee",
+    "keywords": ["nominee", "existing user", "new user", "18 years", "PAN details", "6 months", "liquidate assets"],
+    "type": "procedure"
+  },
+  {
+    "id": "kyc_verification_time",
+    "title": "How much time does it take to complete my KYC verification?",
+    "content": "If you have completed and submitted your KYC for verification successfully via DigiLocker/Express KYC, it usually takes 2 minutes for the KYC verification process to be completed. If you have completed and submitted your KYC for verification successfully via Manual KYC on your CoinSwitch mobile app, it usually takes 5 to 10 minutes for the KYC verification process to be completed. For this, please ensure that you have, Clicked and uploaded a good-quality image of your valid KYC documents. The name with which you have created your CoinSwitch account should match the name on all the uploaded KYC documents.",
+    "category": "kyc",
+    "subcategory": "kyc_pending_rejected",
+    "keywords": ["KYC verification time", "DigiLocker", "Express KYC", "2 minutes", "Manual KYC", "5 to 10 minutes"],
+    "type": "information"
+  },
+  {
+    "id": "kyc_rejected",
+    "title": "My KYC verification has been rejected/failed. What should I do?",
+    "content": "In case your KYC has been rejected/failed, you will receive a KYC-rejected message from CoinSwitch, along with the reason for your KYC rejection. Please note that your KYC may have been rejected due to one of the following reasons: 1. You may have uploaded soft copies or xeroxes or screenshots of your documents instead of the real-time photo of your original documents. 2. The uploaded images may have been unclear and blurred. 3. Your details (name or date of birth) on your CoinSwitch account may not have matched with the details on your uploaded KYC documents. 4. The uploaded selfie may have been unclear, blurred, or did not match the documents. Try to follow the above guidelines to smoothen your KYC verification process. If you receive a message informing you that your KYC has been rejected, contact us by creating a ticket from your registered email ID. Mention the reason for rejection and upload your Video KYC while creating the ticket.",
+    "category": "kyc",
+    "subcategory": "kyc_pending_rejected",
+    "keywords": ["KYC rejected", "soft copies", "xeroxes", "screenshots", "unclear images", "blurred", "Video KYC"],
+    "type": "troubleshooting"
+  },
+  {
+    "id": "kyc_complete_process",
+    "title": "How to complete my KYC verification process?",
+    "content": "If your Aadhaar is linked to your mobile number, and you have a webcam on your desktop/laptop, you can complete your KYC verification process on CoinSwitch PRO by following the simple steps below. Go to the 'KYC Verification' page and click on 'ENTER AADHAAR'. You will be redirected to the DigiLocker website. Read the terms, provide your consent, and click on 'Authenticate Aadhaar'. Enter your Aadhaar number, enter the text shown in the box, and click on 'Next'. Enter the OTP sent to your Aadhaar-linked mobile number and click on 'Continue'. Read the terms and give access to your DigiLocker by clicking on 'Allow'. If your PAN details are missing from DigiLocker, then the system prompts you to enter your PAN details. Once your PAN details are entered, click on 'Fetch'. Take a selfie using your webcam and click on 'Submit'. Once your document verification gets completed, you will be redirected from DigiLocker to the CoinSwitch PRO website. Once your KYC has been verified, you need to verify your email ID. Enter your email ID and click on 'GET EMAIL OTP'. Enter the OTP sent to your email ID and click on 'SUBMIT'. Once your email ID has been verified, you will get an alert on your screen. In case your Aadhaar is not linked to your mobile number, and you do not have a webcam on your desktop/laptop, you can complete your KYC verification process for CoinSwitch PRO via the Manual KYC option on the CoinSwitch mobile app.",
+    "category": "kyc",
+    "subcategory": "kyc_verification",
+    "keywords": ["KYC verification process", "Aadhaar linked", "webcam", "DigiLocker", "selfie", "email verification"],
+    "type": "procedure"
+  },
+  {
+    "id": "kyc_valid_documents",
+    "title": "What are the valid KYC documents?",
+    "content": "The valid KYC documents that you will need to complete your KYC verification process on CoinSwitch PRO are: 1. PAN card for ID proof 2. Any one of the documents below for address proof: Aadhaar, Voter ID, Passport. Note: 1. You have to upload both front and backside photos of the documents. 2. Both PAN and Aadhaar/Voter ID/passport should belong to you. 3. Driving license will not be accepted.",
+    "category": "kyc",
+    "subcategory": "kyc_verification",
+    "keywords": ["valid KYC documents", "PAN card", "ID proof", "address proof", "Aadhaar", "Voter ID", "Passport", "driving license not accepted"],
+    "type": "requirements"
+  },
+  {
+    "id": "security_platform",
+    "title": "How secure is this platform?",
+    "content": "As a legal entity running a crypto trading business in India, we are bound by the laws of this land. We adhere to all the legal requirements, including KYC and identity verification norms, and have also taken self-regulatory measures to ensure the safety of your funds with us. From the security perspective, we have the best infrastructure and people in place to ensure your funds are free from any cyber threats. Disclaimer: Crypto products and NFTs are unregulated and can be highly risky. There may be no regulatory recourse for any loss from such transactions. The information provided in this post is not to be considered as investment/financial advice from CoinSwitch. Any action taken upon the information shall be at the user's own risk.",
+    "category": "general",
+    "subcategory": "security",
+    "keywords": ["platform security", "legal requirements", "KYC", "identity verification", "cyber threats", "infrastructure"],
+    "type": "information"
+  },
+  {
+    "id": "security_crypto_safe",
+    "title": "Is my crypto safe?",
+    "content": "Any crypto assets transferred via your CoinSwitch PRO account are safe with us. From the security perspective, we have the best infrastructure and people in place to ensure your crypto holdings are free from any cyber threats. We also adhere to all the legal requirements, including KYC and identity verification norms, and have also taken self-regulatory measures to ensure the safety of your crypto holdings with us. Disclaimer: Crypto products and NFTs are unregulated and can be highly risky. There may be no regulatory recourse for any loss from such transactions. The information provided in this post is not to be considered as investment/financial advice from CoinSwitch. Any action taken upon the information shall be at the user's own risk.",
+    "category": "general",
+    "subcategory": "security",
+    "keywords": ["crypto safe", "crypto assets", "crypto holdings", "cyber threats", "infrastructure", "legal requirements"],
+    "type": "information"
+  },
+  {
+    "id": "security_money_safe",
+    "title": "Is my money safe?",
+    "content": "Any funds transferred via your CoinSwitch PRO account are safe with us. From the security perspective, we have the best infrastructure and people in place to ensure your funds are free from any cyber threats. We also adhere to all the legal requirements, including KYC and identity verification norms, and have also taken self-regulatory measures to ensure the safety of your funds with us. Disclaimer: Crypto products and NFTs are unregulated and can be highly risky. There may be no regulatory recourse for any loss from such transactions. The information provided in this post is not to be considered as investment/financial advice from CoinSwitch. Any action taken upon the information shall be at the user's own risk.",
+    "category": "general",
+    "subcategory": "security",
+    "keywords": ["money safe", "funds", "cyber threats", "infrastructure", "legal requirements", "self-regulatory measures"],
+    "type": "information"
+  },
+  {
+    "id": "security_email_hacked",
+    "title": "My email is hacked. What should I do?",
+    "content": "In case your email has been hacked, please create a ticket with our support team. While creating the ticket, ensure to share: 1. Your registered mobile number 2. Any information on the hack. We will promptly take action and pause all your withdrawals to ensure that your funds are secure. Note: Do not share your OTP or PIN with anyone. CoinSwitch will never ask you for your PIN or OTP.",
+    "category": "general",
+    "subcategory": "security",
+    "keywords": ["email hacked", "support ticket", "registered mobile number", "pause withdrawals", "OTP", "PIN"],
+    "type": "emergency_procedure"
+  },
+  {
+    "id": "about_coinswitch_difference",
+    "title": "What is the difference between CoinSwitch PRO and App?",
+    "content": "CoinSwitch and CoinSwitch PRO are interlinked platforms that one can access via the same app or website. They are both meant to help users trade easily, but one is built for a different class of users. Good old CoinSwitch keeps it simple. You can buy, sell, and start SIPs in 100+ cryptos instantly starting from ₹100. The platform is one of the easiest crypto apps to navigate, designed for regular users. PRO, on the other hand, takes it up a notch for experienced traders. Designed to address professional traders' specific needs, it includes additional features like TradingView charts, limit orders, and access to multiple Indian crypto exchanges. To know more, read this blog!",
+    "category": "general",
+    "subcategory": "about_coinswitch_pro",
+    "keywords": ["CoinSwitch PRO vs App", "interlinked platforms", "regular users", "experienced traders", "TradingView charts", "limit orders", "multiple exchanges"],
+    "type": "information"
+  },
+  {
+    "id": "about_coinswitch_pro",
+    "title": "What is CoinSwitch PRO?",
+    "content": "In a nutshell, CoinSwitch PRO is an advanced trading platform with a lot of additional features. With CoinSwitch PRO, you gain a wider selection, multiple exchanges in one place, and low commission: You can select the coin of your choice from a huge number of Coin-INR pairs in India. You can also select advanced graphs and indicators that will help you analyze the market more deeply. You can trade your selected coin on any of the multiple exchanges available on CoinSwitch PRO. With your CoinSwitch PRO, you can trade on CoinSwitch or CoinDCX or WazirX. You can cross-reference the prices across these exchanges, and trade at the best price on the exchange of your choice. Also, you can buy on one exchange and sell on another. You can trade at a comparatively lower commission with CoinSwitch PRO.",
+    "category": "general",
+    "subcategory": "about_coinswitch_pro",
+    "keywords": ["advanced trading platform", "Coin-INR pairs", "advanced graphs", "indicators", "multiple exchanges", "CoinDCX", "WazirX", "lower commission"],
+    "type": "information"
+  },
+  {
+    "id": "charts_ohlc",
+    "title": "What is OHLC?",
+    "content": "OHLC stands for OPEN-HIGH-LOW-CLOSE. OHLC is a chart used by many traders and investors to analyze the performance of an asset for a specific time period. This time period can be 1 minute/2-minutes/daily/weekly/monthly/yearly based on your analysis requirement. The bottom of the vertical line is the LOW. It signifies how low did the price go during a specific period. The top of the vertical line is the HIGH. It signifies how high did the price go during a specific period. The left arm of the vertical line is the OPEN. It signifies where the price opened for that period. The right arm of the vertical line is the CLOSE. It signifies where the price closed for that period. If the open is below the close, as shown in the left line, it indicates an up market during that period. Similarly, if the open is above the close, as shown in the right line, it indicated a down market.",
+    "category": "charts_and_data",
+    "subcategory": "charts",
+    "keywords": ["OHLC", "OPEN-HIGH-LOW-CLOSE", "chart", "traders", "investors", "vertical line", "up market", "down market"],
+    "type": "educational"
+  },
+  {
+    "id": "data_trade_history",
+    "title": "What is trade history?",
+    "content": "Trade history shows the last 10 trades that happened on the selected exchange for the selected asset.",
+    "category": "charts_and_data",
+    "subcategory": "data",
+    "keywords": ["trade history", "last 10 trades", "selected exchange", "selected asset"],
+    "type": "information"
+  },
+  {
+    "id": "data_order_book",
+    "title": "What is an Order Book?",
+    "content": "Order Book helps you see all the open orders on both buy and sell sides, organized by price level for a specific pair on an exchange. It shows corresponding volumes to indicate the market depth.",
+    "category": "charts_and_data",
+    "subcategory": "data",
+    "keywords": ["Order Book", "open orders", "buy and sell sides", "price level", "market depth", "volumes"],
+    "type": "information"
+  },
+  {
+    "id": "taxation_crypto_gains",
+    "title": "Do I have to pay any tax on the gains from my crypto transactions?",
+    "content": "Yes, any gains (profits) earned through the virtual digital assets i.e., crypto assets, are subjected to a 30% tax, plus applicable surcharge and cess, at the time of filing income tax returns.",
+    "category": "taxation",
+    "subcategory": "crypto_earnings_tax",
+    "keywords": ["crypto gains tax", "virtual digital assets", "30% tax", "surcharge", "cess", "income tax returns"],
+    "type": "tax_information"
+  },
+  {
+    "id": "trading_order_types",
+    "title": "What order types are supported on CoinSwitch PRO?",
+    "content": "You can currently place only Limit Orders and Stop-Limit Orders on the CoinSwitch Pro platform. Other order types will be enabled in the coming days. You can view these order types while placing an order. Limit Buy Order: The limit buy order lets you choose the price at which a currency can be purchased. To place a limit buy order, you have to set a price that you think the currency might reach some time in the future. The amount you set for the limit buy order would be locked in your INR wallet till the order gets executed, expired, or deleted. When the market moves and if the buy price of the currency reaches the price that you set, it will get executed, and you will receive your currency at your set limit price. The execution of this type of order is not guaranteed, as it solely depends on the market. You can however delete a limit buy order if you think the market is not moving in your favor and your locked balance would be available in your INR wallet. Limit Sell Order: Similar to limit buy order, the limit sell order lets you sell your currency at your set limit price. When the market moves and the selling price reaches your set price, the order is executed, and you receive the amount in your INR wallet. The amount in your wallet would remain locked till the order is either executed, expired, or deleted. Please note that the graph on the coin screen is the historic representation of the buy prices, and a limit sell order is executed at the selling price. Hence, even if the buy price has reached your set limit, the selling price might not have reached it yet, due to which your order would still be in a pending state. The execution of the order is also not guaranteed, as it solely depends on the market. You can however delete a limit sell order if you think the market is not moving in your favour and your locked balance would be available in your INR wallet. Stop Limit Order: A stop-limit order is a type of order that combines the features of a stop order and a limit order. A stop-limit order is an order to buy or sell a crypto once the price of the security reaches a specified price, known as the stop price. When the stop price is reached, the stop-limit order becomes a limit order that will be executed at a specified price (or better). You set a stop price and a limit price for your stop-limit order. If the price of the crypto reaches the stop price, the stop-limit order is triggered and becomes a limit order. The limit order is then placed on the order book at the limit price you specified. If the crypto can be bought or sold at the limit price or a better price, the order will be filled.",
+    "category": "trading",
+    "subcategory": "orders",
+    "keywords": ["order types", "Limit Orders", "Stop-Limit Orders", "limit buy order", "limit sell order", "stop price", "locked balance"],
+    "type": "educational"
+  },
+  {
+    "id": "trading_stop_limit_buy",
+    "title": "How to place a Stop-Limit Buy order?",
+    "content": "Follow the simple steps below to place a Stop-Limit Buy order on CoinSwitch PRO. On your 'Trade' page, search and select the coin you want to buy, click on 'Buy', select 'Stop-Limit', and select the 'Exchange' on which you want to buy the coin. Set your trigger price, set your limit price, enter the amount or quantity, and click on 'Fee breakup' to see the total applicable fee. The 'Trigger Price' is the price at which a limit order will be placed on the order book. If the price of the specified crypto goes beyond the 'Limit Price' (above or below) the limit order will not be executed. Ensure that you have sufficient balance in your wallet to execute the order and click on 'Place Order'. Your Stop-Limit Buy order will be placed successfully!",
+    "category": "trading",
+    "subcategory": "orders",
+    "keywords": ["Stop-Limit Buy order", "trigger price", "limit price", "fee breakup", "sufficient balance", "Trade page"],
+    "type": "procedure"
+  },
+  {
+    "id": "trading_limit_sell",
+    "title": "How to place a Limit Sell order?",
+    "content": "Follow the simple steps below to place a Limit Sell order on CoinSwitch PRO. On your 'Trade' page, search and select the coin you want to sell, click on 'Sell', select 'Limit', and select the 'Exchange' on which you want to sell the coin. Enter the amount or quantity, set your limit price, and click on 'Fee breakup' to see the total applicable fee. Click on 'PLACE ORDER'. Your Limit Sell order will be placed successfully!",
+    "category": "trading",
+    "subcategory": "orders",
+    "keywords": ["Limit Sell order", "Trade page", "sell", "limit price", "fee breakup", "PLACE ORDER"],
+    "type": "procedure"
+  },
+  {
+    "id": "trading_stop_limit_sell",
+    "title": "How to place a Stop-Limit Sell order?",
+    "content": "Follow the simple steps below to place a Stop-Limit Sell order on CoinSwitch PRO. On your 'Trade' page, search and select the coin you want to sell, click on 'Sell', select 'Stop-Limit', and select the 'Exchange' on which you want to sell the coin. Set your trigger price, set your limit price, enter the amount or quantity, and click on 'Fee breakup' to see the total applicable fee. The 'Trigger Price' is the price at which a limit order will be placed on the order book. If the price of the specified crypto goes beyond the 'Limit Price' (above or below) the limit order will not be executed. Click on 'PLACE ORDER'. Your Stop-Limit Sell order will be placed successfully!",
+    "category": "trading",
+    "subcategory": "orders",
+    "keywords": ["Stop-Limit Sell order", "trigger price", "limit price", "fee breakup", "PLACE ORDER", "Trade page"],
+    "type": "procedure"
+  },
+  {
+    "id": "trading_crypto_futures",
+    "title": "What is crypto futures trading?",
+    "content": "Crypto futures are contracts that allow you to buy or sell a cryptocurrency at a predetermined price in the future, without actually owning the coin. These are called perpetual contracts, and since they don't have a fixed expiry date, you can hold your position as long as you want unless it's closed manually or liquidated due to market movement. Most traders use technical analysis, charts, and trends to make informed decisions. How Does It Work? Let's say Bitcoin is priced at ₹30,00,000. If you believe the price will rise, you can go long meaning you're buying with the expectation of selling at a higher price. If you think the price will fall, you can go short which means selling now and buying back later at a lower price. The difference between your entry and exit price is where your profit or loss comes from. And because you're trading the price and not the asset, you don't need to own the actual Bitcoin. What About Leverage? In futures trading, you can use something called leverage — which means you can trade with a larger amount than what you actually have in your wallet. For example, with 5x leverage, if you have ₹1,000, you can place a trade worth ₹5,000. While leverage helps amplify profits, it can also increase your risk — so it's important to use it carefully and always manage your exposure. (In a Nutshell) You can trade on the price movement of crypto without owning the coin. It works for both rising and falling markets go long or short based on your view. Leverage lets you trade bigger, but also comes with higher risk. You can open and close trades anytime, no need to wait for expiry. It's important to have a plan and use risk management tools like stop-loss orders.",
+    "category": "trading",
+    "subcategory": "markets",
+    "keywords": ["crypto futures", "perpetual contracts", "predetermined price", "go long", "go short", "leverage", "5x leverage", "technical analysis", "stop-loss orders"],
+    "type": "educational"
+  },
+  {
+    "id": "trading_coins_listed",
+    "title": "What coins are listed on CoinSwitch PRO?",
+    "content": "The following coins are listed on CoinSwitch PRO. You can also view the supported exchanges on which these listed coins can be traded, displayed below the corresponding coin's name.",
+    "category": "trading",
+    "subcategory": "list_of_coins",
+    "keywords": ["coins listed", "supported exchanges", "coin's name"],
+    "type": "information"
+  },
+  {
+    "id": "trading_exchanges_update",
+    "title": "Updates to the exchanges supported on CoinSwitch PRO",
+    "content": "12th January 2023. We periodically assess the viability of the coins and exchanges supported on CoinSwitch PRO to ensure that you are trading with the very best. Following our latest review, we have decided CoinDCX will no longer be listed as an exchange on CoinSwitch PRO. However, this does not affect your trading experience. Please note that: You can continue to place your trades on any of our other exchanges. You will still have access to our wide selection of over 100 crypto-INR pairs to help you trade seamlessly. You will also be able to trade with 80% lower commissions! With regard to the prior trades made on the CoinDCX exchange, we have been holding your funds on the CoinDCX exchange on your behalf. Now, these funds will be moved to our own custodial wallets. To know more about how we secure your funds and holdings, check out this article on our Proof of Reserves and wallet addresses. FAQs: 1. How does the delisting of the CoinDCX exchange affect my trades? Your trading experience remains unaffected. You can continue to place your trades on any of our other exchanges - WazirX and CoinSwitchX. You will still have access to our wide selection of over 100 crypto-INR pairs to help you trade seamlessly. Of course, you will also be able to trade with 80% lower commissions! 2. What about the limit orders I have placed on the CoinDCX exchange? Nothing, unless you decide to cancel them. We will not cancel any open limit orders even after the CoinDCX exchange is delisted. 3. What happens to my CoinDCX crypto holdings on CoinSwitch PRO? Your holdings will remain secure! The crypto we held on your behalf with CoinDCX will now be moved into our custodial wallets. To know more about how we secure your funds and holdings, check out this article on our Proof of Reserves and wallet addresses. 4. What about arbitrage opportunities? You can still make the most of arbitrage strategies by trading across the two available exchanges on CoinSwitch PRO. Buy low on one exchange and sell high on another, thus making an easy profit! 5. Are you planning to list any other exchanges? We are continuously evaluating options and will conduct a rigorous screening process to uphold the highest standards we maintain for your trades. Once we have an update, we will inform you of the same. 6. What improvements are being made to my trading experience? Stay tuned for a bunch of exciting new features coming soon to CoinSwitch PRO! We are also working on tweaks to improve your experience based on your feedback. 7. Are there any plans to relist CoinDCX? We are in talks with these partners and will be sure to bring them back, if the opportunity arises. Thank you for your support as we build a more transparent, sustainable, and advanced crypto trading platform! If you have any questions, please contact our support team at https://cspro-support.coinswitch.co/s/contactsupport.",
+    "category": "trading",
+    "subcategory": "exchanges_supported",
+    "keywords": ["CoinDCX delisted", "12th January 2023", "WazirX", "CoinSwitchX", "custodial wallets", "arbitrage opportunities", "Proof of Reserves", "80% lower commissions"],
+    "type": "announcement"
+  },
+  {
+    "id": "trading_exchanges_faqs_1",
+    "title": "How does the delisting of the CoinDCX exchange affect my trades?",
+    "content": "Your trading experience remains unaffected. You can continue to place your trades on any of our other exchanges - WazirX and CoinSwitchX. You will still have access to our wide selection of over 100 crypto-INR pairs to help you trade seamlessly. Of course, you will also be able to trade with 80% lower commissions!",
+    "category": "trading",
+    "subcategory": "exchanges_supported",
+    "keywords": ["CoinDCX delisting", "trading experience", "WazirX", "CoinSwitchX", "100 crypto-INR pairs", "80% lower commissions"],
+    "type": "faq"
+  },
+  {
+    "id": "trading_exchanges_faqs_2",
+    "title": "What about the limit orders I have placed on the CoinDCX exchange?",
+    "content": "Nothing, unless you decide to cancel them. We will not cancel any open limit orders even after the CoinDCX exchange is delisted.",
+    "category": "trading",
+    "subcategory": "exchanges_supported",
+    "keywords": ["limit orders", "CoinDCX exchange", "cancel", "open limit orders", "delisted"],
+    "type": "faq"
+  },
+  {
+    "id": "trading_exchanges_faqs_3",
+    "title": "What happens to my CoinDCX crypto holdings on CoinSwitch PRO?",
+    "content": "Your holdings will remain secure! The crypto we held on your behalf with CoinDCX will now be moved into our custodial wallets. To know more about how we secure your funds and holdings, check out this article on our Proof of Reserves and wallet addresses.",
+    "category": "trading",
+    "subcategory": "exchanges_supported",
+    "keywords": ["CoinDCX crypto holdings", "secure", "custodial wallets", "Proof of Reserves", "wallet addresses"],
+    "type": "faq"
+  },
+  {
+    "id": "trading_exchanges_faqs_4",
+    "title": "What about arbitrage opportunities after CoinDCX delisting?",
+    "content": "You can still make the most of arbitrage strategies by trading across the two available exchanges on CoinSwitch PRO. Buy low on one exchange and sell high on another, thus making an easy profit!",
+    "category": "trading",
+    "subcategory": "exchanges_supported",
+    "keywords": ["arbitrage opportunities", "arbitrage strategies", "two available exchanges", "buy low", "sell high", "easy profit"],
+    "type": "faq"
+  },
+  {
+    "id": "trading_exchanges_faqs_5",
+    "title": "Are you planning to list any other exchanges?",
+    "content": "We are continuously evaluating options and will conduct a rigorous screening process to uphold the highest standards we maintain for your trades. Once we have an update, we will inform you of the same.",
+    "category": "trading",
+    "subcategory": "exchanges_supported",
+    "keywords": ["list other exchanges", "evaluating options", "rigorous screening", "highest standards", "update"],
+    "type": "faq"
+  },
+  {
+    "id": "trading_exchanges_faqs_6",
+    "title": "What improvements are being made to my trading experience?",
+    "content": "Stay tuned for a bunch of exciting new features coming soon to CoinSwitch PRO! We are also working on tweaks to improve your experience based on your feedback.",
+    "category": "trading",
+    "subcategory": "exchanges_supported",
+    "keywords": ["improvements", "trading experience", "exciting new features", "tweaks", "feedback"],
+    "type": "faq"
+  },
+  {
+    "id": "trading_exchanges_faqs_7",
+    "title": "Are there any plans to relist CoinDCX?",
+    "content": "We are in talks with these partners and will be sure to bring them back, if the opportunity arises.",
+    "category": "trading",
+    "subcategory": "exchanges_supported",
+    "keywords": ["relist CoinDCX", "talks with partners", "bring them back", "opportunity arises"],
+    "type": "faq"
+  },
+  {
+    "id": "taxation_tds_certificates",
+    "title": "Where do I get TDS certificates/reports?",
+    "content": "You can find out your total TDS deductions either through TDS reports or invoices. The TDS Certificate (Form 16A) will be provided for every quarter. It will contain the details of the TDS deducted by CoinSwitch for the quarter. The TDS certificate for the current quarter (July-August-September) will be made available on your CoinSwitch app soon. Once it is available, we will intimate you via app notification or SMS/email alerts. Additionally, you can also view the TDS deductions of a transaction, on the invoice for that transaction. You can download the invoice from the Orders History section on your CoinSwitch app.",
+    "category": "taxation",
+    "subcategory": "tds",
+    "keywords": ["TDS certificates", "TDS reports", "Form 16A", "quarterly", "app notification", "Orders History", "invoice"],
+    "type": "procedure"
+  },
+  {
+    "id": "taxation_tds_amount",
+    "title": "How much TDS is deducted for crypto transactions?",
+    "content": "Tax Deducted at Source (TDS) is an advance tax collected at the source by the government to establish a trail of transactions. TDS is deducted at the origin of the income (i.e., when a sell order has been executed). It is deducted by the payer (CoinSwitch) and is remitted to the tax authorities by the payer on behalf of the payee (You, the trader). Effective 1 July 2022, 1% TDS is applicable on the sale/transfer of virtual digital assets (VDA/crypto).",
+    "category": "taxation",
+    "subcategory": "tds",
+    "keywords": ["TDS amount", "1% TDS", "advance tax", "sell order", "July 2022", "virtual digital assets", "VDA"],
+    "type": "procedure"
+  }
+]

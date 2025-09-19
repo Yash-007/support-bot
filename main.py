@@ -24,7 +24,7 @@ def parse_args():
                       help='Reinitialize the database (warning: deletes existing data)')
     # parser.add_argument('--auth-token', type=str, required=True,
     #                   help='Authentication token for CoinSwitch API')
-    parser.add_argument('--test-type', type=str, choices=['wallet', 'trading', 'fees', 'all'],
+    parser.add_argument('--test-type', type=str, choices=['wallet', 'trading', 'fees', 'all', 'server'],
                       default='all', help='Type of tests to run (wallet/trading/fees/all)')
     parser.add_argument('--delay', type=int, default=3,
                       help='Delay between queries in seconds (default: 3)')
@@ -209,7 +209,7 @@ else:
     print(f"Total documents in database: {collection.count()}")
 
 ############## Test Queries ##############
-bot = BotFacade(auth_token=args.auth_token)
+bot = BotFacade(auth_token="")
 
 # Wallet API specific test queries
 wallet_test_queries = [
@@ -331,7 +331,7 @@ def run_test_queries(queries, test_name, delay=3):
                 
             # Process query
             start_time = time.time()
-            answer = bot.get_data_from_llm(model, collection, query)
+            answer = bot.get_data_from_llm(model, collection, query, web=False)
             processing_time = time.time() - start_time
             
             # Check response
@@ -546,10 +546,13 @@ if __name__ == "__main__":
 
         data = request.get_json()
         user_query = data.get("query", "")
+        web_search = data.get("web", False)  # Get web parameter, default to False
+        print(f"Web search: {web_search}")
+        print(f"User query: {user_query}")
         if not user_query:
             return jsonify({"error": "No query provided"}), 400
         try:
-            answer = bot.get_data_from_llm(model, collection, user_query)
+            answer = bot.get_data_from_llm(model, collection, user_query, web=web_search)
             return jsonify({"answer": answer, "status": "success"}), 200
         except Exception as e:
             return jsonify({"error": str(e), "status": "error"}), 500

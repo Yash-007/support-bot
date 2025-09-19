@@ -42,6 +42,186 @@ class CSProAPIClient:
         except Exception as e:
             print(f"Warning: Failed to log API response: {str(e)}")
 
+    def get_wallet_transactions(self, limit: int = 100, deposit_cursor: str = "", withdrawal_cursor: str = "") -> Dict:
+        """Get wallet transaction history."""
+        try:
+            url = f"{self.base_url}/pro/api/v1/cspro/wallet-transactions_v2"
+            params = {
+                "limit": limit,
+                "deposit_cursor": deposit_cursor,
+                "withdrawal_cursor": withdrawal_cursor
+            }
+            self.headers["x-request-id"] = str(uuid.uuid4())
+            
+            print("\n" + "="*50)
+            print("API Request: GET /pro/api/v1/cspro/wallet-transactions_v2")
+            print(f"Parameters: {json.dumps(params, indent=2)}")
+            print("="*50)
+            
+            response = requests.get(
+                url,
+                headers=self.headers,
+                params=params,
+                cookies=self.cookies
+            )
+            response.raise_for_status()
+            
+            data = response.json()
+            
+            # Log raw API response
+            self.log_api_response("/pro/api/v1/cspro/wallet-transactions_v2", data)
+            
+            if not isinstance(data, dict):
+                raise ValueError("Invalid response format")
+                
+            return data
+
+        except requests.exceptions.RequestException as e:
+            error_msg = f"Error fetching wallet transactions: {str(e)}"
+            print(f"\nAPI Error: {error_msg}")
+            print("="*50)
+            return {"error": error_msg}
+        except ValueError as e:
+            error_msg = f"Error parsing response: {str(e)}"
+            print(f"\nParsing Error: {error_msg}")
+            print("="*50)
+            return {"error": error_msg}
+        except Exception as e:
+            error_msg = f"Unexpected error: {str(e)}"
+            print(f"\nUnexpected Error: {error_msg}")
+            print("="*50)
+            return {"error": error_msg}
+
+    def analyze_transactions(self, txn_type: Optional[str] = None) -> Dict:
+        """Analyze wallet transactions."""
+        print(f"\nAnalyzing wallet transactions for type: {txn_type or 'all'}")
+        
+        transactions = self.get_wallet_transactions()
+        if "error" in transactions:
+            return transactions
+
+        analysis = {
+            "deposits": {
+                "total_amount": float(0),  # Initialize as float instead of Decimal
+                "count": 0,
+                "latest": [],
+                "sources": set(),
+                "currencies": set()
+            },
+            "withdrawals": {
+                "total_amount": float(0),  # Initialize as float instead of Decimal
+                "count": 0,
+                "latest": [],
+                "destinations": set(),
+                "currencies": set()
+            }
+        }
+
+        print("\nProcessing transactions...")
+        
+        # Process deposits
+        for deposit in transactions.get('data', {}).get('deposits', []):
+            try:
+                if txn_type and txn_type.lower() != 'deposit':
+                    continue
+                    
+                amount = float(deposit.get('amount', 0))  # Convert to float immediately
+                currency = deposit.get('currency', '').upper()
+                source = deposit.get('source', '')
+                status = deposit.get('status', '').upper()
+                
+                if status == 'COMPLETED':
+                    analysis['deposits']['total_amount'] += amount
+                    analysis['deposits']['count'] += 1
+                    analysis['deposits']['sources'].add(source)
+                    analysis['deposits']['currencies'].add(currency)
+                    
+                    # Track latest deposits (keep last 5)
+                    deposit_info = {
+                        'amount': amount,
+                        'currency': currency,
+                        'source': source,
+                        'timestamp': deposit.get('created_at', '')
+                    }
+                    analysis['deposits']['latest'].append(deposit_info)
+                    analysis['deposits']['latest'] = sorted(
+                        analysis['deposits']['latest'],
+                        key=lambda x: x['timestamp'],
+                        reverse=True
+                    )[:5]
+                    
+            except (TypeError, ValueError, KeyError) as e:
+                print(f"Error processing deposit: {str(e)}")
+                continue
+
+        # Process withdrawals
+        for withdrawal in transactions.get('data', {}).get('withdrawals', []):
+            try:
+                if txn_type and txn_type.lower() != 'withdrawal':
+                    continue
+                    
+                amount = float(withdrawal.get('amount', 0))  # Convert to float immediately
+                currency = withdrawal.get('currency', '').upper()
+                destination = withdrawal.get('destination', '')
+                status = withdrawal.get('status', '').upper()
+                
+                if status == 'COMPLETED':
+                    analysis['withdrawals']['total_amount'] += amount
+                    analysis['withdrawals']['count'] += 1
+                    analysis['withdrawals']['destinations'].add(destination)
+                    analysis['withdrawals']['currencies'].add(currency)
+                    
+                    # Track latest withdrawals (keep last 5)
+                    withdrawal_info = {
+                        'amount': amount,
+                        'currency': currency,
+                        'destination': destination,
+                        'timestamp': withdrawal.get('created_at', '')
+                    }
+                    analysis['withdrawals']['latest'].append(withdrawal_info)
+                    analysis['withdrawals']['latest'] = sorted(
+                        analysis['withdrawals']['latest'],
+                        key=lambda x: x['timestamp'],
+                        reverse=True
+                    )[:5]
+                    
+            except (TypeError, ValueError, KeyError) as e:
+                print(f"Error processing withdrawal: {str(e)}")
+                continue
+
+        # Convert sets to lists for JSON serialization
+        analysis['deposits']['sources'] = list(analysis['deposits']['sources'])
+        analysis['deposits']['currencies'] = list(analysis['deposits']['currencies'])
+        analysis['withdrawals']['destinations'] = list(analysis['withdrawals']['destinations'])
+        analysis['withdrawals']['currencies'] = list(analysis['withdrawals']['currencies'])
+
+        print("\nAnalysis Summary:")
+        print("="*50)
+        print("\nDeposits:")
+        print(f"• Total Amount: ₹{analysis['deposits']['total_amount']:,.2f}")
+        print(f"• Count: {analysis['deposits']['count']}")
+        print(f"• Currencies: {', '.join(analysis['deposits']['currencies'])}")
+        print(f"• Sources: {', '.join(analysis['deposits']['sources'])}")
+        if analysis['deposits']['latest']:
+            print("\nLatest Deposits:")
+            for deposit in analysis['deposits']['latest']:
+                print(f"• {deposit['currency']} {deposit['amount']:,.2f} from {deposit['source']}")
+                print(f"  {deposit['timestamp']}")
+        
+        print("\nWithdrawals:")
+        print(f"• Total Amount: ₹{analysis['withdrawals']['total_amount']:,.2f}")
+        print(f"• Count: {analysis['withdrawals']['count']}")
+        print(f"• Currencies: {', '.join(analysis['withdrawals']['currencies'])}")
+        print(f"• Destinations: {', '.join(analysis['withdrawals']['destinations'])}")
+        if analysis['withdrawals']['latest']:
+            print("\nLatest Withdrawals:")
+            for withdrawal in analysis['withdrawals']['latest']:
+                print(f"• {withdrawal['currency']} {withdrawal['amount']:,.2f} to {withdrawal['destination']}")
+                print(f"  {withdrawal['timestamp']}")
+        print("="*50)
+        
+        return analysis
+
     def get_closed_orders(self, page: int = 1) -> Dict:
         """Get closed orders history."""
         try:
@@ -118,20 +298,20 @@ class CSProAPIClient:
                     analysis[base_curr] = {
                         "executed_orders": 0,
                         "cancelled_orders": 0,
-                        "total_volume_inr": Decimal('0'),
-                        "total_leverage": Decimal('0'),
+                        "total_volume_inr": float(0),  # Initialize as float
+                        "total_leverage": float(0),    # Initialize as float
                         "order_count": 0,
                         "buy_orders": {
                             "count": 0,
-                            "volume_inr": Decimal('0'),
-                            "avg_price": Decimal('0'),
-                            "total_qty": Decimal('0')
+                            "volume_inr": float(0),    # Initialize as float
+                            "avg_price": float(0),     # Initialize as float
+                            "total_qty": float(0)      # Initialize as float
                         },
                         "sell_orders": {
                             "count": 0,
-                            "volume_inr": Decimal('0'),
-                            "avg_price": Decimal('0'),
-                            "total_qty": Decimal('0')
+                            "volume_inr": float(0),    # Initialize as float
+                            "avg_price": float(0),     # Initialize as float
+                            "total_qty": float(0)      # Initialize as float
                         },
                         "last_trade": None
                     }
@@ -139,9 +319,9 @@ class CSProAPIClient:
                 # Extract order details
                 status = order.get('order_execution_status', '')
                 trade_type = order.get('trade_type', '').lower()
-                executed_qty = Decimal(str(order.get('executed_quantity', 0)))
-                avg_price = Decimal(str(order.get('average_execution_price', 0)))
-                inr_amount = Decimal(str(order.get('inr_amount', 0)))
+                executed_qty = float(order.get('executed_quantity', 0))  # Convert to float
+                avg_price = float(order.get('average_execution_price', 0))  # Convert to float
+                inr_amount = float(order.get('inr_amount', 0))  # Convert to float
                 created_at = order.get('created_at', '')
                 
                 # Update general stats
@@ -171,24 +351,16 @@ class CSProAPIClient:
                     if not analysis[base_curr]["last_trade"] or order_time > datetime.fromisoformat(analysis[base_curr]["last_trade"]["created_at"].replace('Z', '+00:00')):
                         analysis[base_curr]["last_trade"] = {
                             "side": trade_type,
-                            "price": float(avg_price),
-                            "quantity": float(executed_qty),
+                            "price": float(avg_price),  # Convert to float
+                            "quantity": float(executed_qty),  # Convert to float
                             "created_at": created_at,
                             "status": status,
-                            "inr_amount": float(inr_amount)
+                            "inr_amount": float(inr_amount)  # Convert to float
                         }
 
             except (TypeError, ValueError, KeyError) as e:
                 print(f"Error processing order: {str(e)}")
                 continue
-
-        # Convert Decimal to float for JSON serialization
-        for sym_data in analysis.values():
-            sym_data["total_volume_inr"] = float(sym_data["total_volume_inr"])
-            for side in ["buy_orders", "sell_orders"]:
-                sym_data[side]["volume_inr"] = float(sym_data[side]["volume_inr"])
-                sym_data[side]["avg_price"] = float(sym_data[side]["avg_price"])
-                sym_data[side]["total_qty"] = float(sym_data[side]["total_qty"])
 
         print("\nAnalysis Summary:")
         print("="*50)
@@ -216,4 +388,154 @@ class CSProAPIClient:
                 print(f"• Time: {data['last_trade']['created_at']}")
             print("-"*50)
         
+        return analysis
+
+    def get_portfolio_data(self) -> Dict:
+        """Get portfolio data."""
+        try:
+            url = f"{self.base_url}/pro/api/v1/cspro/portfolio_data"
+            self.headers["x-request-id"] = str(uuid.uuid4())
+            self.headers["content-type"] = "application/json"
+            
+            print("\n" + "="*50)
+            print("API Request: POST /pro/api/v1/cspro/portfolio_data")
+            print("="*50)
+            
+            response = requests.post(
+                url,
+                headers=self.headers,
+                cookies=self.cookies
+            )
+            response.raise_for_status()
+            
+            data = response.json()
+            print("portfolio data", data)
+            
+            # Log raw API response
+            self.log_api_response("/pro/api/v1/cspro/portfolio_data", data)
+            
+            if not isinstance(data, dict):
+                raise ValueError("Invalid response format")
+                
+            return data
+
+        except requests.exceptions.RequestException as e:
+            error_msg = f"Error fetching portfolio data: {str(e)}"
+            print(f"\nAPI Error: {error_msg}")
+            print("="*50)
+            return {"error": error_msg}
+        except ValueError as e:
+            error_msg = f"Error parsing response: {str(e)}"
+            print(f"\nParsing Error: {error_msg}")
+            print("="*50)
+            return {"error": error_msg}
+        except Exception as e:
+            error_msg = f"Unexpected error: {str(e)}"
+            print(f"\nUnexpected Error: {error_msg}")
+            print("="*50)
+            return {"error": error_msg}
+
+    def analyze_portfolio(self, currency: Optional[str] = None) -> Dict:
+        """Analyze portfolio data for all or specific currency."""
+        print(f"\nAnalyzing portfolio data for currency: {currency or 'all'}")
+        
+        portfolio = self.get_portfolio_data()
+        if "error" in portfolio:
+            return portfolio
+
+        analysis = {
+            "total_invested": float(0),
+            "total_current_value": float(0),
+            "total_pnl": float(0),
+            "assets": {},
+            "summary": {
+                "total_assets": 0,
+                "profitable_assets": 0,
+                "loss_making_assets": 0
+            }
+        }
+
+        print("\nProcessing portfolio...")
+        
+        # Process each asset
+        for asset in portfolio.get('data', []):
+            try:
+                curr = asset.get('currency', '').lower()
+                if currency and curr != currency.lower():
+                    continue
+
+                # Get asset details
+                main_balance = float(asset.get('main_balance', 0))
+                buy_avg_price = float(asset.get('buy_average_price', 0))
+                invested_value = float(asset.get('invested_value', 0))
+                current_value = float(asset.get('current_value', 0))
+                current_price = float(asset.get('sell_rate', 0))
+                
+                # Calculate PnL
+                pnl = current_value - invested_value
+                pnl_percentage = (pnl / invested_value * 100) if invested_value > 0 else 0
+                
+                # Store asset analysis
+                analysis['assets'][curr] = {
+                    "name": asset.get('name', ''),
+                    "balance": main_balance,
+                    "buy_average_price": buy_avg_price,
+                    "current_price": current_price,
+                    "invested_value": invested_value,
+                    "current_value": current_value,
+                    "pnl": pnl,
+                    "pnl_percentage": pnl_percentage,
+                    "blocked": {
+                        "deposit": float(asset.get('blocked_balance_deposit', 0)),
+                        "withdraw": float(asset.get('blocked_balance_withdraw', 0)),
+                        "order": float(asset.get('blocked_balance_order', 0)),
+                        "stake": float(asset.get('blocked_balance_stake', 0)),
+                        "vault": float(asset.get('blocked_balance_vault', 0)),
+                        "future": float(asset.get('blocked_balance_future', 0))
+                    }
+                }
+                
+                # Update totals
+                analysis['total_invested'] += invested_value
+                analysis['total_current_value'] += current_value
+                analysis['total_pnl'] += pnl
+                
+                # Update summary
+                analysis['summary']['total_assets'] += 1
+                if pnl >= 0:
+                    analysis['summary']['profitable_assets'] += 1
+                else:
+                    analysis['summary']['loss_making_assets'] += 1
+
+            except (TypeError, ValueError, KeyError) as e:
+                print(f"Error processing asset {curr}: {str(e)}")
+                continue
+
+        # Calculate overall PnL percentage
+        if analysis['total_invested'] > 0:
+            analysis['total_pnl_percentage'] = (analysis['total_pnl'] / analysis['total_invested']) * 100
+        else:
+            analysis['total_pnl_percentage'] = 0
+
+        print("\nPortfolio Summary:")
+        print("="*50)
+        print(f"Total Assets: {analysis['summary']['total_assets']}")
+        print(f"Total Invested: ₹{analysis['total_invested']:,.2f}")
+        print(f"Current Value: ₹{analysis['total_current_value']:,.2f}")
+        print(f"Overall P&L: ₹{analysis['total_pnl']:,.2f} ({analysis['total_pnl_percentage']:,.2f}%)")
+        print(f"Profitable Assets: {analysis['summary']['profitable_assets']}")
+        print(f"Loss Making Assets: {analysis['summary']['loss_making_assets']}")
+        
+        if currency:
+            asset = analysis['assets'].get(currency.lower())
+            if asset:
+                print(f"\n{asset['name']} ({currency.upper()}) Details:")
+                print(f"Balance: {asset['balance']:.8f}")
+                print(f"Buy Average: ₹{asset['buy_average_price']:,.2f}")
+                print(f"Current Price: ₹{asset['current_price']:,.2f}")
+                print(f"Invested Value: ₹{asset['invested_value']:,.2f}")
+                print(f"Current Value: ₹{asset['current_value']:,.2f}")
+                print(f"P&L: ₹{asset['pnl']:,.2f} ({asset['pnl_percentage']:,.2f}%)")
+        
+        print("="*50)
         return analysis

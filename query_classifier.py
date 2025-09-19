@@ -11,14 +11,20 @@ class QueryClassifier:
         """Classify the query to determine the appropriate data source and parameters."""
         
         prompt = f"""Classify the following query into one of these categories:
-- WALLET_API: For queries about wallet transactions, deposits, withdrawals
-- TRADING_API: For queries about trading history, orders, positions
+
+- WALLET_API: For queries about wallet transactions, deposits, withdrawals (money in/out of platform)
+- TRADING_API: For queries about trading history, investment amounts, total invested, trading performance, historical data
+- PORTFOLIO_API: For queries about CURRENT portfolio value, CURRENT holdings, CURRENT P&L (snapshot of now)
 - FEES_DATA: For queries about trading fees, commission rates, fee tiers
 - FAQ_DB: For general questions about the platform
 
+IMPORTANT DISTINCTIONS:
+- TRADING_API: "How much I've invested", "Total amount invested", "Investment history", "Trading performance", "How much I bought/sold"
+- PORTFOLIO_API: "Current value", "Current holdings", "Current P&L", "What I have now"
+
 Output should be valid JSON with this structure:
 {{
-    "category": "WALLET_API|TRADING_API|FEES_DATA|FAQ_DB",
+    "category": "WALLET_API|TRADING_API|PORTFOLIO_API|FEES_DATA|FAQ_DB",
     "params": {{
         // For WALLET_API:
         "type": "deposit|withdrawal|all",  // Transaction type
@@ -29,12 +35,27 @@ Output should be valid JSON with this structure:
         "symbol": "btc|eth|etc",  // Cryptocurrency symbol (null if not specified)
         "status": "completed|cancelled|all"  // Order status
         
+        // For PORTFOLIO_API:
+        "currency": "btc|eth|etc",  // Specific currency to analyze (null for all)
+        "metric": "value|pnl|balance|all"  // What to analyze
+        
         // For FEES_DATA:
         "market": "spot|futures|options",  // Market type
         "currency": "inr|usdt",  // Fee currency (for futures/options)
         "fee_type": "maker|taker|all"  // Fee type
     }}
 }}
+
+Example queries and classifications:
+1. "What's my current portfolio value?" -> {{"category": "PORTFOLIO_API", "params": {{"currency": null, "metric": "value"}}}}
+2. "How much have I invested in BTC till date?" -> {{"category": "TRADING_API", "params": {{"symbol": "btc", "type": "buy", "status": "completed"}}}}
+3. "What's my total investment in crypto?" -> {{"category": "TRADING_API", "params": {{"symbol": null, "type": "buy", "status": "completed"}}}}
+4. "Show me my current ETH holdings" -> {{"category": "PORTFOLIO_API", "params": {{"currency": "eth", "metric": "balance"}}}}
+5. "What's my current P&L on BTC?" -> {{"category": "PORTFOLIO_API", "params": {{"currency": "btc", "metric": "pnl"}}}}
+6. "How much Bitcoin have I bought in total?" -> {{"category": "TRADING_API", "params": {{"symbol": "btc", "type": "buy", "status": "completed"}}}}
+7. "What's my trading performance?" -> {{"category": "TRADING_API", "params": {{"symbol": null, "type": "all", "status": "completed"}}}}
+8. "Show me my deposit history" -> {{"category": "WALLET_API", "params": {{"type": "deposit", "status": "all"}}}}
+9. "What are the trading fees?" -> {{"category": "FEES_DATA", "params": {{"market": "spot", "currency": null, "fee_type": "all"}}}}
 
 Query: {query}
 

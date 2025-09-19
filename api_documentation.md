@@ -1,7 +1,7 @@
 # CoinSwitch Pro AI Chatbot - Hackathon Integration Guide
 
 ## Quick Start
-The chatbot combines real-time trading data with static FAQs to provide intelligent responses. Single API endpoint, simple integration.
+The chatbot combines real-time trading data, portfolio information, and static FAQs to provide intelligent responses. Single API endpoint, simple integration.
 
 ## Core API
 ```
@@ -10,7 +10,7 @@ Content-Type: application/json
 Cookie: st=your_auth_token
 
 {
-    "query": "Show my recent trades"
+    "query": "Show me my portfolio value"
 }
 ```
 
@@ -26,12 +26,46 @@ Response:
 
 ### 1. Smart Query Understanding
 The system automatically detects what the user is asking about:
+- Portfolio holdings and performance
 - Wallet activity (deposits, withdrawals)
 - Trading history (orders, PnL)
 - Platform fees
 - General FAQs
 
 ### 2. Real-time Data (requires auth)
+
+#### Portfolio Queries
+```
+# Overall Portfolio
+"What's my total portfolio value?"
+"Show me my portfolio summary"
+"How much profit/loss am I in?"
+"Which assets are profitable?"
+"Show me my best performing assets"
+"What's my total investment value?"
+
+# Specific Asset Queries
+"How much ETH do I have?"
+"What's my average buy price for BTC?"
+"Show me my COMP holdings"
+"What's my P&L on GMT?"
+"Show me my blocked balance in USDT"
+"What's my unrealized profit in ETH?"
+
+# Asset Status
+"Show me my staked assets"
+"What's my available balance vs blocked?"
+"Which assets are in orders?"
+"Show me assets in my vault"
+"What's my futures balance?"
+
+# Performance Analysis
+"Show me assets with positive P&L"
+"Which coin am I losing most on?"
+"What's my best performing asset?"
+"Compare my BTC and ETH performance"
+"Show me assets with over 10% profit"
+```
 
 #### Wallet Queries
 ```
@@ -40,11 +74,6 @@ The system automatically detects what the user is asking about:
 "How much money have I withdrawn in total?"
 "What's my current wallet balance?"
 "Show me my transaction history"
-"What's my largest deposit amount?"
-"Show me withdrawals from last month"
-"What's my average deposit size?"
-"How many successful deposits have I made?"
-"Show me my pending transactions"
 ```
 
 #### Trading Queries
@@ -54,11 +83,6 @@ The system automatically detects what the user is asking about:
 "How much Bitcoin have I bought in total?"
 "What's my total trading volume?"
 "Show me my ETH trading history"
-"What's my profit/loss on BTC trades?"
-"Show me my largest trade"
-"What's my average selling price for ETH?"
-"How many trades did I make last month?"
-"Show me my open orders"
 ```
 
 ### 3. Static Knowledge
@@ -70,11 +94,6 @@ The system automatically detects what the user is asking about:
 "What are the maker fees for USDT futures?"
 "Tell me about options trading fees"
 "What are the taker fees for spot trading?"
-"Show me all trading fees"
-"What's the fee structure for high volume traders?"
-"Tell me about VIP level fees in futures"
-"What are the fees for options trading in USDT?"
-"How do maker and taker fees work?"
 ```
 
 #### FAQ & Documentation Queries
@@ -84,15 +103,6 @@ The system automatically detects what the user is asking about:
 "What happens if my deposit fails?"
 "How secure is my crypto on this platform?"
 "What are the different types of orders I can place?"
-"How do I change my bank details?"
-```
-
-#### Combined/Complex Queries
-```
-"What are the trading fees and how much have I paid in fees so far?"
-"Explain the withdrawal process and show my withdrawal history"
-"What's my wallet balance and what are the withdrawal limits?"
-"Show me my BTC trades and explain the trading fees"
 ```
 
 ## Quick Integration (React + TypeScript)
@@ -165,7 +175,7 @@ export const ChatBot = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-          placeholder="Ask about your trades, wallet, or any questions..."
+          placeholder="Ask about your portfolio, trades, wallet, or any questions..."
         />
         <button onClick={handleSend}>Send</button>
       </div>
@@ -250,6 +260,8 @@ button {
    - Clear chat history
    - Save chat history
    - Markdown support in responses
+   - Portfolio summary cards
+   - Asset performance charts
 
 3. **Auth Handling**
    - Get auth token from your app's session
